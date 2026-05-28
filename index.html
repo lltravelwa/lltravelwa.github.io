@@ -97,26 +97,54 @@
       align-items: center;
       padding: 120px 7% 80px;
       overflow: hidden;
+      background: #080909;
+      isolation: isolate;
+    }
+
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      /*
+        关键参数：
+        68% center = 让图片视觉重点偏右，
+        车子会更稳定地停留在文字右边。
+      */
+      object-position: 68% center;
+
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
       background:
-        linear-gradient(to right, rgba(0,0,0,0.68), rgba(0,0,0,0.22), rgba(0,0,0,0.06)),
-        linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.08)),
-        url("hero-pink-lake.png") 63% center / cover no-repeat;
+        linear-gradient(to right, rgba(0,0,0,0.76), rgba(0,0,0,0.34), rgba(0,0,0,0.08)),
+        linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.08));
+      pointer-events: none;
     }
 
     .hero::after {
       content: "";
       position: absolute;
       inset: 0;
+      z-index: 1;
       background:
         radial-gradient(circle at 72% 45%, rgba(255,255,255,0.05), transparent 35%),
-        radial-gradient(circle at 18% 40%, rgba(0,0,0,0.26), transparent 48%);
+        radial-gradient(circle at 18% 40%, rgba(0,0,0,0.30), transparent 48%);
       pointer-events: none;
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 650px;
+      max-width: 620px;
     }
 
     .eyebrow {
@@ -371,7 +399,17 @@
       flex-wrap: wrap;
     }
 
+    @media (max-width: 1200px) {
+      .hero-image {
+        object-position: 70% center;
+      }
+    }
+
     @media (max-width: 980px) {
+      .hero-image {
+        object-position: 72% center;
+      }
+
       .cards,
       .service-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -403,10 +441,16 @@
       .hero {
         min-height: 92vh;
         padding: 120px 6% 70px;
+      }
+
+      .hero-image {
+        object-position: 74% center;
+      }
+
+      .hero::before {
         background:
-          linear-gradient(to right, rgba(0,0,0,0.72), rgba(0,0,0,0.26)),
-          linear-gradient(to top, rgba(0,0,0,0.74), rgba(0,0,0,0.08)),
-          url("hero-pink-lake.png") 64% center / cover no-repeat;
+          linear-gradient(to right, rgba(0,0,0,0.78), rgba(0,0,0,0.34), rgba(0,0,0,0.10)),
+          linear-gradient(to top, rgba(0,0,0,0.76), rgba(0,0,0,0.10));
       }
 
       h1 {
@@ -462,6 +506,8 @@
   <main>
 
     <section class="hero">
+      <img class="hero-image" src="hero-pink-lake.png" alt="Pink lake road trip in Western Australia">
+
       <div class="hero-content">
         <div class="eyebrow">Western Australia Road Trips</div>
 
